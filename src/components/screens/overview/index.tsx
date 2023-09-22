@@ -1,3 +1,5 @@
+"use client";
+import { useContext } from "react";
 import { Separator } from "@/components/ui/separator";
 import {
   Card,
@@ -5,10 +7,16 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../../ui/card";
+} from "@/components/ui/card";
 import Kpi from "./kpi";
+import { DataTable } from "@/components/data-table";
+import { MainContext } from "@/context/main";
+import { columns } from "@/components/data-table/columns";
 
 export default function Overview() {
+  const context = useContext(MainContext);
+  console.log(context?.movements);
+
   return (
     <>
       <Kpi />
@@ -17,9 +25,14 @@ export default function Overview() {
         <Card className="md:col-span-2 lg:col-span-5 row-span-2">
           <CardHeader>
             <CardTitle>{`Vue d'ensemble`}</CardTitle>
-            <CardDescription>You made 265 sales this month.</CardDescription>
+            <CardDescription>
+              Vous avez un total de {context?.movements.length} mouvements sur
+              cette période.
+            </CardDescription>
           </CardHeader>
-          <CardContent className="pl-2">{/* <Overview /> */}</CardContent>
+          <CardContent className="pl-2">
+            <DataTable data={context?.movements ?? []} columns={columns} />
+          </CardContent>
         </Card>
 
         <Card className="md:col-span-1 lg:col-span-3">
