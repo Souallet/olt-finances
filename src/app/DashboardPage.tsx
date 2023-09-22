@@ -1,17 +1,16 @@
-import { Metadata } from "next";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { CalendarDateRangePicker } from "@/components/date-range-picker";
 import Overview from "@/components/screens/overview";
 import { Separator } from "@/components/ui/separator";
-import FilePortal from "@/components/file-portal";
-
-export const metadata: Metadata = {
-  title: "OLT Finances",
-  description: "Application de visualisation de ses finances depuis Tiime.",
-};
+import FileUploader from "@/components/file-uploader";
+import { MainContext } from "@/context/main";
 
 export default function DashboardPage() {
+  const { filename, movements } = useContext(MainContext);
+
+  const data = filename && movements;
+
   return (
     <div className="flex-col md:flex container mx-auto h-screen">
       <div className="flex-1 space-y-4 p-8 pt-6 h-full">
@@ -23,7 +22,7 @@ export default function DashboardPage() {
           </div>
         </div>
         <Separator className="my-4" />
-        <FilePortal>
+        {data ? (
           <Tabs defaultValue="overview" className="space-y-4">
             <TabsList>
               <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -40,7 +39,11 @@ export default function DashboardPage() {
               <h3 className="text-3xl font-bold tracking-tight">Revenus</h3>
             </TabsContent>
           </Tabs>
-        </FilePortal>
+        ) : (
+          <div className="mt-4 h-max">
+            <FileUploader />
+          </div>
+        )}
       </div>
     </div>
   );
