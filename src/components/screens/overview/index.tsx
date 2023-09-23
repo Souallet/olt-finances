@@ -12,10 +12,11 @@ import Kpi from "./kpi";
 import { DataTable } from "@/components/data-table";
 import { MainContext } from "@/context/main";
 import { columns } from "@/components/data-table/columns";
+import CategoriesIncome from "./CategoriesIncome";
+import CategoriesExpenditures from "./CategoriesExpenditures";
 
 export default function Overview() {
   const context = useContext(MainContext);
-  console.log(context?.movements);
 
   return (
     <>
@@ -30,7 +31,7 @@ export default function Overview() {
               cette période.
             </CardDescription>
           </CardHeader>
-          <CardContent className="pl-2">
+          <CardContent>
             <DataTable data={context?.movements ?? []} columns={columns} />
           </CardContent>
         </Card>
@@ -38,16 +39,32 @@ export default function Overview() {
         <Card className="md:col-span-1 lg:col-span-3">
           <CardHeader>
             <CardTitle>Revenus par catégories</CardTitle>
-            <CardDescription>You made 265 sales this month.</CardDescription>
+            <CardDescription>
+              Classement des types de revenus les plus élevés
+            </CardDescription>
           </CardHeader>
-          <CardContent>{/* <RecentSales /> */}</CardContent>
+          <CardContent>
+            <CategoriesIncome
+              incomes={
+                context?.movements.filter((e) => e["Montant TTC"] > 0) ?? []
+              }
+            />
+          </CardContent>
         </Card>
         <Card className="md:col-span-1 lg:col-span-3">
           <CardHeader>
             <CardTitle>Dépenses par catégories</CardTitle>
-            <CardDescription>You made 265 sales this month.</CardDescription>
+            <CardDescription>
+              Classement des types de dépenses les plus élevées
+            </CardDescription>
           </CardHeader>
-          <CardContent>{/* <RecentSales /> */}</CardContent>
+          <CardContent>
+            <CategoriesExpenditures
+              expenditures={
+                context?.movements.filter((e) => e["Montant TTC"] < 0) ?? []
+              }
+            />
+          </CardContent>
         </Card>
         <Card className="md:col-span-2 lg:col-span-4">
           <CardHeader>

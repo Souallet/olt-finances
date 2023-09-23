@@ -25,10 +25,6 @@ export default function MainContextProvider({ children }: PropsWithChildren) {
   const [movements, setMovements] = useState<any[]>([]);
   const [filename, setFilename] = useState<string | null>(null);
 
-  useEffect(() => {
-    console.log(movements);
-  }, [movements]);
-
   const value = { filename, setFilename, movements, setMovements };
 
   return <MainContext.Provider value={value}>{children}</MainContext.Provider>;
