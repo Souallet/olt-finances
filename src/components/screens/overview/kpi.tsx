@@ -1,6 +1,36 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export default function Kpi() {
+export default function Kpi({ movements = [] }: { movements: any[] }) {
+  const total = movements.reduce(
+    (acc, currentValue) => acc + parseFloat(currentValue["Montant TTC"]),
+    0
+  );
+
+  const totalIncomes = movements.reduce(
+    (acc, currentValue) =>
+      parseFloat(currentValue["Montant TTC"]) > 0
+        ? acc + parseFloat(currentValue["Montant TTC"])
+        : acc + 0,
+    0
+  );
+
+  const totalExpenditures = movements.reduce(
+    (acc, currentValue) =>
+      parseFloat(currentValue["Montant TTC"]) < 0 &&
+      currentValue["Label"] !== "TVA A PAYER"
+        ? acc + parseFloat(currentValue["Montant TTC"])
+        : acc + 0,
+    0
+  );
+
+  const totalTVA = movements.reduce(
+    (acc, currentValue) =>
+      currentValue["Label"] === "TVA A PAYER"
+        ? acc + parseFloat(currentValue["Montant TTC"])
+        : acc + 0,
+    0
+  );
+
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <Card className="col-span-2 ">
@@ -20,10 +50,9 @@ export default function Kpi() {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">45,231.89 €</div>
-          <p className="text-xs text-muted-foreground">
-            +20.1% from last month
-          </p>
+          <div className="text-2xl font-bold">
+            {total.toLocaleString("fr-FR")} €
+          </div>
         </CardContent>
       </Card>
       <Card>
@@ -45,10 +74,9 @@ export default function Kpi() {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">+2350,00 €</div>
-          <p className="text-xs text-muted-foreground">
-            +180.1% from last month
-          </p>
+          <div className="text-2xl font-bold">
+            +{totalIncomes.toLocaleString("fr-FR")} €
+          </div>
         </CardContent>
       </Card>
       <Card>
@@ -69,8 +97,9 @@ export default function Kpi() {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">-12,234 €</div>
-          <p className="text-xs text-muted-foreground">+19% from last month</p>
+          <div className="text-2xl font-bold">
+            {totalExpenditures.toLocaleString("fr-FR")} €
+          </div>
         </CardContent>
       </Card>
       <Card>
@@ -112,7 +141,7 @@ export default function Kpi() {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">10,234 €</div>
+          <div className="text-2xl font-bold">{totalTVA} €</div>
         </CardContent>
       </Card>
     </div>
