@@ -24,7 +24,7 @@ export default function FileUploader() {
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
         const json = xlsx.utils.sheet_to_json(worksheet);
-        context?.setMovements(json);
+        context?.setRawMovements(json);
       };
       reader.readAsArrayBuffer(file);
     });
