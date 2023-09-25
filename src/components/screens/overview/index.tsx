@@ -22,8 +22,8 @@ export default function Overview() {
     <>
       <Kpi movements={context?.movements ?? []} />
       <Separator className="my-4" />
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-8">
-        <Card className="md:col-span-2 lg:col-span-5 row-span-2">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-8">
+        <Card className="md:col-span-2 lg:col-span-8 row-span-2">
           <CardHeader>
             <CardTitle>{`Vue d'ensemble`}</CardTitle>
             <CardDescription>
@@ -36,7 +36,7 @@ export default function Overview() {
           </CardContent>
         </Card>
 
-        <Card className="md:col-span-1 lg:col-span-3">
+        <Card className="md:col-span-2 lg:col-span-4">
           <CardHeader>
             <CardTitle>Revenus par catégories</CardTitle>
             <CardDescription>
@@ -51,7 +51,7 @@ export default function Overview() {
             />
           </CardContent>
         </Card>
-        <Card className="md:col-span-1 lg:col-span-3">
+        <Card className="md:col-span-2 lg:col-span-4">
           <CardHeader>
             <CardTitle>Dépenses par catégories</CardTitle>
             <CardDescription>
