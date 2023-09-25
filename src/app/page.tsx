@@ -14,34 +14,24 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="flex-col md:flex container mx-auto h-screen">
-      <div className="flex-1 space-y-4 p-8 pt-6 h-full">
-        <div className="flex md:items-center justify-between">
-          <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-          <ThemeToggle />
-        </div>
-        <Separator className="my-4" />
-        <FilePortal>
-          <Tabs defaultValue="overview" className="space-y-4">
-            <div className="flex flex-wrap justify-between gap-4">
-              <TabsList>
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="expenditures">Dépenses</TabsTrigger>
-                <TabsTrigger value="incomes">Revenus</TabsTrigger>
-              </TabsList>
-              <CalendarDateRangePicker />
-            </div>
-            <TabsContent value="overview" className="space-y-4">
-              <Overview />
-            </TabsContent>
-            <TabsContent value="expenditures" className="space-y-4">
-              <h3 className="text-3xl font-bold tracking-tight">Dépenses</h3>
-            </TabsContent>
-            <TabsContent value="incomes" className="space-y-4">
-              <h3 className="text-3xl font-bold tracking-tight">Revenus</h3>
-            </TabsContent>
-          </Tabs>
-        </FilePortal>
+      <div className="flex md:items-center justify-between mt-4">
+        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+        <ThemeToggle />
       </div>
+      <Separator className="my-4" />
+      <FilePortal>
+        <Tabs defaultValue="overview" className="space-y-4">
+          <div className="flex flex-wrap justify-between gap-4">
+            <TabsList>
+              <TabsTrigger value="overview">Overview</TabsTrigger>
+            </TabsList>
+            <CalendarDateRangePicker className="max-w-full" />
+          </div>
+          <TabsContent value="overview" className="space-y-4">
+            <Overview />
+          </TabsContent>
+        </Tabs>
+      </FilePortal>
     </div>
   );
 }
