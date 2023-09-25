@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input";
 import { DataTableViewOptions } from "@/components/data-table/view-options";
 
 import { DataTableFacetedFilter } from "@/components/data-table/faceted-filter";
-import { priorities, statuses } from "./data/data";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -18,6 +17,13 @@ export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
+
+  const labels: any = [];
+  const uniqueFacetedValues =
+    table.getColumn("Label")?.getFacetedUniqueValues() ?? [];
+  for (let [key] of uniqueFacetedValues) {
+    labels.push({ value: key, label: key });
+  }
 
   return (
     <div className="flex items-center justify-between">
@@ -36,18 +42,11 @@ export function DataTableToolbar<TData>({
           }
           className="h-8 w-[150px] lg:w-[250px]"
         />
-        {table.getColumn("status") && (
+        {table.getColumn("Label") && (
           <DataTableFacetedFilter
-            column={table.getColumn("status")}
-            title="Status"
-            options={statuses}
-          />
-        )}
-        {table.getColumn("priority") && (
-          <DataTableFacetedFilter
-            column={table.getColumn("priority")}
-            title="Priority"
-            options={priorities}
+            column={table.getColumn("Label")}
+            title="Label"
+            options={labels}
           />
         )}
         {isFiltered && (

@@ -2,10 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Badge } from "@/components/ui/badge";
 import { DataTableColumnHeader } from "@/components/data-table/column-header";
-import { DataTableRowActions } from "@/components/data-table/row-actions";
-import { labels, priorities, statuses } from "./data/data";
 import { Task } from "./data/schema";
 
 export const columns: ColumnDef<Task>[] = [
@@ -24,13 +21,8 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Montant TTC" />
     ),
     cell: ({ row }) => {
-      const label = labels.find(
-        (label) => label.value === row?.original?.label
-      );
-
       return (
         <div className="flex space-x-2">
-          {label && <Badge variant="outline">{label.label}</Badge>}
           <span className="max-w-[500px] truncate font-medium">
             {row.getValue("Montant TTC")}
           </span>
@@ -43,14 +35,12 @@ export const columns: ColumnDef<Task>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Label" />
     ),
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
     cell: ({ row }) => {
-      const label = labels.find(
-        (label) => label.value === row?.original?.label
-      );
-
       return (
         <div className="flex space-x-2">
-          {label && <Badge variant="outline">{label.label}</Badge>}
           <span className="max-w-[500px] truncate font-medium">
             {row.getValue("Label")}
           </span>
@@ -64,13 +54,8 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Commentaire" />
     ),
     cell: ({ row }) => {
-      const label = labels.find(
-        (label) => label.value === row?.original?.label
-      );
-
       return (
         <div className="flex space-x-2">
-          {label && <Badge variant="outline">{label.label}</Badge>}
           <span className="max-w-[500px] truncate font-medium">
             {row.getValue("Commentaire")}
           </span>
@@ -87,13 +72,8 @@ export const columns: ColumnDef<Task>[] = [
       />
     ),
     cell: ({ row }) => {
-      const label = labels.find(
-        (label) => label.value === row?.original?.label
-      );
-
       return (
         <div className="flex space-x-2">
-          {label && <Badge variant="outline">{label.label}</Badge>}
           <span className="max-w-[500px] truncate font-medium">
             {row.getValue("Intitulé de la transaction")}
           </span>
