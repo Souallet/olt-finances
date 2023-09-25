@@ -15,21 +15,21 @@ export default function Page() {
   return (
     <div className="flex-col md:flex container mx-auto h-screen">
       <div className="flex-1 space-y-4 p-8 pt-6 h-full">
-        <div className="flex items-center justify-between space-y-2">
+        <div className="flex md:items-center justify-between">
           <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-          <div className="flex items-center space-x-2">
-            <CalendarDateRangePicker />
-            <ThemeToggle />
-          </div>
+          <ThemeToggle />
         </div>
         <Separator className="my-4" />
         <FilePortal>
           <Tabs defaultValue="overview" className="space-y-4">
-            <TabsList>
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="expenditures">Dépenses</TabsTrigger>
-              <TabsTrigger value="incomes">Revenus</TabsTrigger>
-            </TabsList>
+            <div className="flex flex-wrap justify-between gap-4">
+              <TabsList>
+                <TabsTrigger value="overview">Overview</TabsTrigger>
+                <TabsTrigger value="expenditures">Dépenses</TabsTrigger>
+                <TabsTrigger value="incomes">Revenus</TabsTrigger>
+              </TabsList>
+              <CalendarDateRangePicker />
+            </div>
             <TabsContent value="overview" className="space-y-4">
               <Overview />
             </TabsContent>

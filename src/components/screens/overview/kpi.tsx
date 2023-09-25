@@ -32,8 +32,8 @@ export default function Kpi({ movements = [] }: { movements: any[] }) {
   );
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      <Card className="col-span-2  row-span-2 ">
+    <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
+      <Card className="col-span-2 row-span-2">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-md font-bold">Total</CardTitle>
           <span className="text-2xl font-bold">
@@ -45,7 +45,7 @@ export default function Kpi({ movements = [] }: { movements: any[] }) {
           <Incomes movements={movements} />
         </CardContent>
       </Card>
-      <Card>
+      <Card className="col-span-2 md:col-span-1">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Revenus</CardTitle>
           <svg
@@ -69,7 +69,7 @@ export default function Kpi({ movements = [] }: { movements: any[] }) {
           </div>
         </CardContent>
       </Card>
-      <Card>
+      <Card className="col-span-2 md:col-span-1">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Dépenses</CardTitle>
           <svg
@@ -92,7 +92,7 @@ export default function Kpi({ movements = [] }: { movements: any[] }) {
           </div>
         </CardContent>
       </Card>
-      <Card>
+      <Card className="col-span-2 md:col-span-1">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">
             Revenus moyens mensuel
@@ -114,7 +114,7 @@ export default function Kpi({ movements = [] }: { movements: any[] }) {
           <div className="text-2xl font-bold">2,234 €</div>
         </CardContent>
       </Card>
-      <Card>
+      <Card className="col-span-2 md:col-span-1">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Total TVA</CardTitle>
           <svg
