@@ -20,7 +20,7 @@ export default function Overview() {
 
   return (
     <>
-      <Kpi movements={context?.movements ?? []} />
+      <Kpi />
       <Separator className="my-4" />
       <div className="grid gap-4 grid-cols-2">
         <Card className="col-span-2 lg:col-span-1">

@@ -22,18 +22,14 @@ export default function CategoriesExpenditures({
         const accElementIndex = accumulator.indexOf(accElement);
         accumulator.splice(accElementIndex, 1, {
           "Montant TTC":
-            Math.round(
-              (parseFloat(accElement["Montant TTC"]) +
-                parseFloat(currentValue["Montant TTC"])) *
-                100
-            ) / 100,
+            parseFloat(accElement["Montant TTC"]) +
+            parseFloat(currentValue["Montant TTC"]),
           Label: accElement["Label"],
           Total: accElement["Total"] ? accElement["Total"] + 1 : 1,
         });
       } else {
         accumulator.push({
-          "Montant TTC":
-            Math.round(parseFloat(currentValue["Montant TTC"]) * 100) / 100,
+          "Montant TTC": parseFloat(currentValue["Montant TTC"]),
           Label: currentValue["Label"],
           Total: 1,
         });

@@ -1,20 +1,31 @@
+"use client";
+
 import Incomes from "@/components/charts/incomes";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { MainContext, TMainContext } from "@/context/main";
+import { differenceInMonths, formatDistance } from "date-fns";
+import { useContext } from "react";
 
-export default function Kpi({ movements = [] }: { movements: any[] }) {
-  const total = movements.reduce(
+export default function Kpi() {
+  const context: TMainContext | null = useContext(MainContext);
+
+  const total =
+    context?.movements.reduce(
+      (acc: number, currentValue: any) =>
+        acc + parseFloat(currentValue["Montant TTC"]),
+      0
+    ) ?? 0;
+
+  const incomes = context?.movements.filter(
+    (e) => parseFloat(e["Montant TTC"]) > 0
+  );
+
+  const totalIncomes = incomes?.reduce(
     (acc, currentValue) => acc + parseFloat(currentValue["Montant TTC"]),
     0
   );
 
-  const incomes = movements.filter((e) => parseFloat(e["Montant TTC"]) > 0);
-
-  const totalIncomes = incomes.reduce(
-    (acc, currentValue) => acc + parseFloat(currentValue["Montant TTC"]),
-    0
-  );
-
-  const totalExpenditures = movements.reduce(
+  const totalExpenditures = context?.movements.reduce(
     (acc, currentValue) =>
       parseFloat(currentValue["Montant TTC"]) < 0 &&
       currentValue["Label"] !== "TVA A PAYER"
@@ -23,13 +34,19 @@ export default function Kpi({ movements = [] }: { movements: any[] }) {
     0
   );
 
-  const totalTVA = movements.reduce(
+  const totalTVA = context?.movements.reduce(
     (acc, currentValue) =>
       currentValue["Label"] === "TVA A PAYER"
         ? acc + parseFloat(currentValue["Montant TTC"])
         : acc + 0,
     0
   );
+
+  const monthlyAverage =
+    context?.startDate && context?.endDate
+      ? total /
+        Math.abs(differenceInMonths(context?.startDate, context?.endDate))
+      : 1;
 
   return (
     <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
@@ -42,7 +59,7 @@ export default function Kpi({ movements = [] }: { movements: any[] }) {
           </span>
         </CardHeader>
         <CardContent className="h-56">
-          <Incomes movements={movements} />
+          <Incomes movements={context?.movements ?? []} />
         </CardContent>
       </Card>
       <Card className="col-span-2 md:col-span-1">
@@ -111,7 +128,9 @@ export default function Kpi({ movements = [] }: { movements: any[] }) {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">2,234 €</div>
+          <div className="text-2xl font-bold">
+            {monthlyAverage.toLocaleString("fr-FR")} €
+          </div>
         </CardContent>
       </Card>
       <Card className="col-span-2 md:col-span-1">
