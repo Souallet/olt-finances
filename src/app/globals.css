@@ -55,3 +55,56 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* PRINT MODE */
+
+@media print {
+  html,
+  body {
+    height: initial !important;
+    overflow: initial !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  * {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  *::-webkit-scrollbar {
+    display: none;
+  }
+
+  .print-fit-content {
+    height: fit-content !important;
+  }
+
+  .no-print {
+    display: none;
+  }
+  .print-block {
+    display: block !important;
+  }
+  .page-break {
+    page-break-before: "always" !important;
+  }
+
+  /* //Recalculate width in print mode to fix the bug the graph isn't responsive when print. */
+  .recharts-wrapper,
+  .recharts-surface,
+  .recharts-legend-wrapper {
+    width: 100% !important;
+  }
+  /* //Prevent recharts-legend-item have space between <svg> icon and <span> due to recalculate width: 100% */
+  /* //try width: fit-content not work on safari */
+  .recharts-legend-item > svg {
+    width: auto !important;
+    display: inline-block !important;
+    right: inherit !important; /* align to left */
+  }
+}
+
+@page {
+  size: landscape;
+  margin: 10mm;
+}

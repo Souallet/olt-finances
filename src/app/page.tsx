@@ -5,6 +5,7 @@ import { CalendarDateRangePicker } from "@/components/date-range-picker";
 import Overview from "@/components/screens/overview";
 import { Separator } from "@/components/ui/separator";
 import FilePortal from "@/components/file-portal";
+import PdfExport from "@/components/pdf-export";
 
 export const metadata: Metadata = {
   title: "OLT Finances",
@@ -20,14 +21,17 @@ export default function Page() {
       </div>
       <Separator className="my-4" />
       <FilePortal>
-        <Tabs defaultValue="overview" className="space-y-4">
+        <Tabs id="portal" defaultValue="overview" className="space-y-4 pb-10">
           <div className="flex flex-wrap justify-between gap-4">
             <TabsList>
               <TabsTrigger value="overview">Overview</TabsTrigger>
             </TabsList>
-            <CalendarDateRangePicker className="max-w-full" />
+            <div className="flex flex-wrap gap-4">
+              <CalendarDateRangePicker />
+              <PdfExport elementID={"portal"} />
+            </div>
           </div>
-          <TabsContent value="overview" className="space-y-4">
+          <TabsContent value="overview">
             <Overview />
           </TabsContent>
         </Tabs>

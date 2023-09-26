@@ -5,17 +5,9 @@ import {
   Line,
   Tooltip,
   ResponsiveContainer,
-  XAxis,
-  YAxis,
   ReferenceLine,
 } from "recharts";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
+import { Card } from "../ui/card";
 
 export default function Incomes({ movements = [] }: { movements: any[] }) {
   const data = movements

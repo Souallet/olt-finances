@@ -22,20 +22,7 @@ export default function Overview() {
     <>
       <Kpi movements={context?.movements ?? []} />
       <Separator className="my-4" />
-      <div className="grid pb-10 gap-4 grid-cols-2">
-        <Card className="col-span-2 row-span-2">
-          <CardHeader>
-            <CardTitle>{`Vue d'ensemble`}</CardTitle>
-            <CardDescription>
-              Vous avez un total de {context?.movements.length} mouvements sur
-              cette période.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <DataTable data={context?.movements ?? []} columns={columns} />
-          </CardContent>
-        </Card>
-
+      <div className="grid gap-4 grid-cols-2">
         <Card className="col-span-2 lg:col-span-1">
           <CardHeader>
             <CardTitle>Revenus par catégories</CardTitle>
@@ -66,21 +53,20 @@ export default function Overview() {
             />
           </CardContent>
         </Card>
-        {/* <Card className="md:col-span-2 lg:col-span-4">
-          <CardHeader>
-            <CardTitle>Revenus principaux</CardTitle>
-            <CardDescription>You made 265 sales this month.</CardDescription>
-          </CardHeader>
-          <CardContent><RecentSales /> </CardContent>
-        </Card>
-        <Card className="md:col-span-2 lg:col-span-4">
-          <CardHeader>
-            <CardTitle>Dépenses principales</CardTitle>
-            <CardDescription>You made 265 sales this month.</CardDescription>
-          </CardHeader>
-          <CardContent> <RecentSales /></CardContent>
-        </Card> */}
       </div>
+      <Separator className="my-4" />
+      <Card className="print-fit-content">
+        <CardHeader>
+          <CardTitle>{`Vue d'ensemble`}</CardTitle>
+          <CardDescription>
+            Vous avez un total de {context?.movements.length} mouvements sur
+            cette période.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="print-fit-content">
+          <DataTable data={context?.movements ?? []} columns={columns} />
+        </CardContent>
+      </Card>
     </>
   );
 }
