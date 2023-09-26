@@ -66,15 +66,18 @@ export default function MainContextProvider({ children }: PropsWithChildren) {
 
   useEffect(() => {
     if (startDate && endDate) {
-      const movementsFilteredByDate = rawMovements.filter((e) => {
-        const elementDate = addDays(
-          new Date(1900, 0, 0),
-          e["Date de l'opération"] - 1
-        );
-        return (
-          new Date(elementDate) >= startDate && new Date(elementDate) <= endDate
-        );
-      });
+      const movementsFilteredByDate = rawMovements
+        .filter((e) => {
+          const elementDate = addDays(
+            new Date(1900, 0, 0),
+            e["Date de l'opération"] - 1
+          );
+          return (
+            new Date(elementDate) >= startDate &&
+            new Date(elementDate) <= endDate
+          );
+        })
+        .sort((a, b) => b["Id"] - a["Id"]);
       setMovements(movementsFilteredByDate);
     }
   }, [startDate, endDate]);

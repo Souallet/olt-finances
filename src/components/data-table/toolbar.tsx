@@ -29,16 +29,12 @@ export function DataTableToolbar<TData>({
     <div className="flex items-center justify-between">
       <div className="flex flex-wrap flex-1 items-center gap-2">
         <Input
-          placeholder="Filtrer sur l'intitulé"
+          placeholder="Filtrer sur le commentaire..."
           value={
-            (table
-              .getColumn("Intitulé de la transaction")
-              ?.getFilterValue() as string) ?? ""
+            (table.getColumn("Commentaire")?.getFilterValue() as string) ?? ""
           }
           onChange={(event) =>
-            table
-              .getColumn("Intitulé de la transaction")
-              ?.setFilterValue(event.target.value)
+            table.getColumn("Commentaire")?.setFilterValue(event.target.value)
           }
           className="h-8 w-[150px] lg:w-[250px]"
         />

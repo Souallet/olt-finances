@@ -57,7 +57,7 @@ export default function CategoriesIncome({ incomes }: { incomes: any[] }) {
               <TableCell className="font-medium">{e["Total"]}</TableCell>
               <TableCell>{e["Label"]}</TableCell>
               <TableCell className="font-medium text-green-500 dark:text-green-400">
-                + {e["Montant TTC"]} €
+                + {parseFloat(e["Montant TTC"]).toLocaleString("fr-FR")} €
               </TableCell>
             </TableRow>
           ))

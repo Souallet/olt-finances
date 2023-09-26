@@ -61,7 +61,7 @@ export default function CategoriesExpenditures({
               <TableCell className="font-medium">{e["Total"]}</TableCell>
               <TableCell>{e["Label"]}</TableCell>
               <TableCell className="font-medium text-red-500 dark:text-red-400">
-                {e["Montant TTC"]} €
+                {parseFloat(e["Montant TTC"]).toLocaleString("fr-FR")} €
               </TableCell>
             </TableRow>
           ))
