@@ -5,9 +5,11 @@ import * as xlsx from "xlsx";
 
 import { FilePlusIcon } from "@radix-ui/react-icons";
 import { Card } from "./ui/card";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import { Icons } from "./ui/icons";
 import { MainContext, type TMainContext } from "@/context/main";
+import { Separator } from "./ui/separator";
+import DownloadSample from "./download-sample";
 
 export default function FileUploader() {
   const context: TMainContext | null = useContext(MainContext);
@@ -41,7 +43,7 @@ export default function FileUploader() {
 
   return (
     <div className="mt-36 flex w-full items-center justify-center">
-      <Card className="w-1/2 min-h-fit p-8 flex flex-col gap-8 items-center">
+      <Card className="p-8 flex flex-col gap-8 items-center">
         {acceptedFiles.length === 0 ? (
           <div className="flex flex-col gap-8 items-center" {...getRootProps()}>
             <FilePlusIcon className="w-10 h-10" />
@@ -55,6 +57,13 @@ export default function FileUploader() {
           <>
             <p>Chargement en cours ...</p>
             <Icons.spinner className="mr-2 h-8 w-8 animate-spin" />
+          </>
+        )}
+
+        {acceptedFiles.length === 0 && (
+          <>
+            <Separator />
+            <DownloadSample />
           </>
         )}
       </Card>
