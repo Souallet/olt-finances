@@ -4,6 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { DataTableColumnHeader } from "@/components/data-table/column-header";
 import { Task } from "./data/schema";
+import { cx } from "class-variance-authority";
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -23,8 +24,16 @@ export const columns: ColumnDef<Task>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
-          <span className="max-w-[500px] truncate font-medium">
-            {row.getValue("Montant TTC")}
+          <span
+            className={cx(
+              "max-w-[500px] truncate font-medium",
+              parseFloat(row.getValue("Montant TTC")) >= 0
+                ? "text-green-500 dark:text-green-400"
+                : "text-red-500 dark:text-red-400"
+            )}
+          >
+            {parseFloat(row.getValue("Montant TTC")) > 0 && "+"}
+            {row.getValue("Montant TTC")} €
           </span>
         </div>
       );
